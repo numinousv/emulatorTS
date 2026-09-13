@@ -10,7 +10,7 @@ Demo URL: <https://emulatorts.pages.dev/>
 
 **Instructions on running it locally:**
 ```bash
-git clone <https://github.com/numinousv/emulatorTS.git>
+git clone https://github.com/numinousv/emulatorTS.git
 cd emulatorTS/arc-emu-frontend
 bun install
 cd ..
