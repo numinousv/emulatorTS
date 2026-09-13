@@ -16,9 +16,20 @@ bun install
 cd ..
 cd backend
 setup your own database at https://supabase.com/, connect it via .env (read .env.example, will update it later for more details)
+download and install wrangler: 
+arch-linux: sudo pacman -S wrangler
+or follow their documentation: [wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/)
+add SUPABASE_ANON_KEY and SUPABASE_URL using the commands:
+wrangler secret put SUPABASE_ANON_KEY
+wrangler secret put SUPABASE_URL
+wrangler types
 change $CLOUDFLARE_WORKER_URL in arc-emu-frontend/vite.config.ts and arc-emu-frontend/src/lib/api.ts to your own cloudflare workers URL (remember to use the /api path on api.ts)
 change/add ROM links in backend/src/db/seed.ts by adding the url from **after** /api/archive/download.
 bun install
 cd ..
 (cd backend/dev6 && bun dev) & (cd arc-emu-frontend && bun dev)
+to host the backend api, use the commands:
+cd backend
+wrangler types
+wrangler deploy
 ```
