@@ -103,10 +103,9 @@ function ConsolePage() {
                 variant="outline"
                 onClick={() => setSelectedGame(null)}
                 className="flex items-center text-muted-foreground text-xs mx-auto"
-                aria-label={`Back to ${consoleData.name} games`}
+                aria-label={`Back to games`}
               >
-                <MoveLeftIcon className="h-2 w-2" /> Back to {consoleData.name}{" "}
-                Games
+                <MoveLeftIcon className="h-2 w-2" /> Back to Games
               </Button8>
             </div>
 
