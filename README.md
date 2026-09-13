@@ -7,6 +7,7 @@ Further developed and improved rather rushed school project I did a while back c
 
 Demo URL: <https://emulatorts.pages.dev/>
 
+requires [wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/) if you want to host the backend API as a cloudflare worker
 
 **Instructions on running it locally:**
 ```bash
@@ -18,7 +19,7 @@ cd backend
 setup your own database at https://supabase.com/, connect it via .env (read .env.example, will update it later for more details)
 download and install wrangler: 
 arch-linux: sudo pacman -S wrangler
-or follow their documentation: [wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/)
+or follow their documentation: https://developers.cloudflare.com/workers/wrangler/install-and-update/
 add SUPABASE_ANON_KEY and SUPABASE_URL using the commands:
 wrangler secret put SUPABASE_ANON_KEY
 wrangler secret put SUPABASE_URL
