@@ -1,0 +1,4 @@
+# Local vars for `wrangler dev` (gitignored). Copy to `.dev.vars` and fill in.
+# Never commit real values. Production uses `wrangler secret put`.
+SUPABASE_URL="https://your-project.supabase.co"
+SUPABASE_ANON_KEY="your-anon-publishable-key"

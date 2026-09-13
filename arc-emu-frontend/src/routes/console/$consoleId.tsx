@@ -66,7 +66,7 @@ function ConsolePage() {
                   className="flex items-center text-muted-foreground mx-auto"
                   aria-label="Back to all consoles"
                 >
-                  <MoveLeftIcon className="h-4 w-4 text-muted-foreground border-t-foreground" />{" "}
+                  <MoveLeftIcon className="h-2 w-2 text-muted-foreground border-t-foreground" />{" "}
                   All Consoles
                 </Button8>
               </Link>
@@ -102,10 +102,10 @@ function ConsolePage() {
               <Button8
                 variant="outline"
                 onClick={() => setSelectedGame(null)}
-                className="flex items-center text-muted-foreground mx-auto"
+                className="flex items-center text-muted-foreground text-xs mx-auto"
                 aria-label={`Back to ${consoleData.name} games`}
               >
-                <MoveLeftIcon className="h-4 w-4" /> Back to {consoleData.name}{" "}
+                <MoveLeftIcon className="h-2 w-2" /> Back to {consoleData.name}{" "}
                 Games
               </Button8>
             </div>

@@ -1,3 +1,6 @@
+// NOTE: drizzle tooling client only (seed.ts, migrate.ts, update-colors.ts).
+// The request runtime uses Supabase REST via ./supabase.ts so the same code
+// runs on Node and Cloudflare Workers.
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
