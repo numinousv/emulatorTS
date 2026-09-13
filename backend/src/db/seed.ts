@@ -1,0 +1,348 @@
+import { db } from "./index.ts";
+import { consoles, games } from "./schema.ts";
+
+const SEED_CONSOLES = [
+  {
+    id: "n64",
+    name: "Nintendo 64",
+    description: "64-bit games, iconic 3D titles",
+    icon: "🕹️",
+    color: "linear-gradient(to bottom right, #581c87, #7e22ce)",
+    core: "n64",
+  },
+  {
+    id: "gba",
+    name: "Game Boy Advance",
+    description: "Handheld classics but with a functioning screen this time!",
+    icon: "🎮",
+    color: "linear-gradient(to bottom right, #14532d, #15803d)",
+    core: "gba",
+  },
+  {
+    id: "psx",
+    name: "PlayStation",
+    description: "32-bit (yes, surprisingly) classics",
+    icon: "💿",
+    color: "linear-gradient(to bottom right, #1e3a5f, #1d4ed8)",
+    core: "psx",
+  },
+  {
+    id: "snes",
+    name: "Super Nintendo",
+    description: "16-bit classics",
+    icon: "🎮",
+    color: "linear-gradient(to bottom right, #111827, #374151)",
+    core: "snes",
+  },
+  {
+    id: "nes",
+    name: "Nintendo Entertainment System",
+    description: "8-bit, humble beginnings",
+    icon: "👾",
+    color: "linear-gradient(to bottom right, #7f1d1d, #dc2626)",
+    core: "nes",
+  },
+  {
+    id: "nds",
+    name: "Nintendo DS",
+    description: "! Use the desmume2015 Core for better performance !",
+    icon: "💿",
+    color: "linear-gradient(to bottom right, #fca5a5, #ef4444)",
+    core: "nds",
+  },
+  {
+    id: "segaSaturn",
+    name: "Sega Saturn",
+    description: "Underrated, but Dreamcast is still their magnum opus",
+    icon: "🪐",
+    color: "linear-gradient(to bottom right, #9333ea, #c084fc)",
+    core: "segaSaturn",
+  },
+  {
+    id: "psp",
+    name: "Playstation Portable",
+    description: "I need to buy a physical psp one day...",
+    icon: "💿",
+    color: "linear-gradient(to bottom right, #93c5fd, #3b82f6)",
+    core: "psp",
+  },
+  {
+    id: "segaMD",
+    name: "Sega Genesis / MegaDrive",
+    description: "sega does what nintendon't and blast processing...",
+    icon: "💿",
+    color: "linear-gradient(to bottom right, #f9a8d4, #ec4899)",
+    core: "segaMD",
+  },
+];
+// urls for games
+const SEED_GAMES = [
+  {
+    id: "starfox",
+    name: "Star Fox",
+    core: "n64",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "n64",
+  },
+  {
+    id: "doa",
+    name: "DoA",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "psx",
+  },
+  {
+    id: "harmony-of-dissonance",
+    name: "Castlevania Harmony of Dissonance",
+    core: "gba",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "gba",
+  },
+  {
+    id: "turtles-in-time",
+    name: "TMNT: Turtles in Time",
+    core: "snes",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "snes",
+  },
+  {
+    id: "battletoads-nes",
+    name: "Battletoads",
+    core: "nes",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "nes",
+  },
+  {
+    id: "sotn",
+    name: "Castlevania: Symphony of the Night",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "psx",
+  },
+  {
+    id: "Final Fantasy Tactics Advance",
+    name: "Final Fantasy Tactics Advance",
+    core: "gba",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "gba",
+  },
+  {
+    id: "ffta2",
+    name: "Final Fantasy Tactics A2",
+    core: "nds",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "nds",
+  },
+  {
+    id: "gg-dust-strikers",
+    name: "Guilty Gear: Dust Strikers",
+    core: "nds",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "nds",
+  },
+  {
+    id: "virton-cybertroopers",
+    name: "Virtual On - Cyber Troopers",
+    core: "segaSaturn",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "segaSaturn",
+  },
+  {
+    id: "princess-crown",
+    name: "Princess Crown",
+    core: "segaSaturn",
+    url: "/api/archive/download",
+    description: "EN fanTL, old Vanillaware game",
+    consoleId: "segaSaturn",
+  },
+  {
+    id: "star-ocean",
+    name: "Star Ocean",
+    core: "snes",
+    url: "/api/archive/download",
+    description: "fan TL",
+    consoleId: "snes",
+  },
+  {
+    id: "front-mission-iii",
+    name: "Front Mission III",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "psx",
+  },
+  {
+    id: "ff-tactics-wotl",
+    name: "Final Fantasy Tactics: WOTL",
+    core: "psp",
+    url: "/api/archive/download",
+    description: "animation fix ver. - better than the 2025 remake btw",
+    consoleId: "psp",
+  },
+  {
+    id: "disgaea",
+    name: "Disgaea: Afternoon of Darkness",
+    core: "psp",
+    url: "/api/archive/download",
+    description: "fin -> export savefile -> load disc 2 -> import save file",
+    consoleId: "psp",
+  },
+  {
+    id: "chrono-trigger",
+    name: "Chrono Trigger",
+    core: "snes",
+    url: "/api/archive/download",
+    description: "++++",
+    consoleId: "snes",
+  },
+  {
+    id: "ff-ix",
+    name: "Final Fantasy IX (DISC 1)",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "fin -> export savefile -> load disc 2 -> import save file",
+    consoleId: "psx",
+  },
+  {
+    id: "ff-viii",
+    name: "Final Fantasy VIII (DISC 1)",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "fin -> export savefile -> load disc 2 -> import save file",
+    consoleId: "psx",
+  },
+  {
+    id: "vagrant-story",
+    name: "Vagrant Story",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "psx",
+  },
+  {
+    id: "ff-tactics",
+    name: "Final Fantasy Tactics",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "psx",
+  },
+  {
+    id: "psiv",
+    name: "Phantasy Star IV",
+    core: "segaMD",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "segaMD",
+  },
+  {
+    id: "dgm-w",
+    name: "Digimon World",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "psx",
+  },
+  {
+    id: "fire-emblem",
+    name: "Fire Emblen: The Binding Blade",
+    core: "gba",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "gba",
+  },
+  {
+    id: "fire-red",
+    name: "Pokemon Fire Red",
+    core: "gba",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "gba",
+  },
+  {
+    id: "sapphire",
+    name: "Pokemon Sapphire",
+    core: "gba",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "gba",
+  },
+  {
+    id: "ogre",
+    name: "Tactics: Ogre",
+    core: "psx",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "psx",
+  },
+  {
+    id: "phoenixwright",
+    name: "Phoenix Wright: Ace Attorney",
+    core: "nds",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "nds",
+  },
+  {
+    id: "fsrmm",
+    name: "Flower, Sun and Rain - Murder and Mystery in Paradise",
+    core: "nds",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "nds",
+  },
+  {
+    id: "ffiii",
+    name: "Final Fantasy III",
+    core: "snes",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "snes",
+  },
+  {
+    id: "smtds",
+    name: "SMT - Devil Survivor",
+    core: "nds",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "nds",
+  },
+  {
+    id: "ffiv",
+    name: "Final Fantasy IV",
+    core: "nds",
+    url: "/api/archive/download",
+    description: "",
+    consoleId: "nds",
+  },
+];
+
+async function seed() {
+  console.log("Seeding consoles...");
+  for (const console of SEED_CONSOLES) {
+    await db.insert(consoles).values(console).onConflictDoNothing();
+  }
+
+  console.log("Seeding games...");
+  for (const game of SEED_GAMES) {
+    await db.insert(games).values(game).onConflictDoNothing();
+  }
+
+  console.log("Seed complete!");
+  process.exit(0);
+}
+
+seed().catch((err) => {
+  console.error("Seed failed:", err);
+  process.exit(1);
+});
