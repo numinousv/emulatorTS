@@ -28,6 +28,7 @@ change $CLOUDFLARE_WORKER_URL in arc-emu-frontend/vite.config.ts and arc-emu-fro
 change/add ROM links in backend/src/db/seed.ts by adding the url from **after** /api/archive/download.
 bun install
 cd ..
+(cd backend/dev6 && bun install) & (cd arc-emu-frontend && bun install)
 (cd backend/dev6 && bun dev) & (cd arc-emu-frontend && bun dev)
 to host the backend api, use the commands:
 cd backend
