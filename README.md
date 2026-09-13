@@ -2,6 +2,9 @@
 
 *Will update the README.md when I'm not lazy, clean up unused code (finished this a long time ago and did not intend on adding attaching a git repository for it, hence the currently uncleaned mess)*
 
+Further developed and improved rather rushed school project I did a while back called
+[arcade-emulator](https://github.com/numinousv/arcade-emulator)
+
 Demo URL: <https://emulatorts.pages.dev/>
 
 
