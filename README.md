@@ -1,6 +1,6 @@
-# Web Emulator using Retroarch via EmulatorJS, rewritten to work with Typescript without using simple embeds, easily hostable on cloudflare via pages for frontend and workers for the backend, Supabase as a hosted database as well, rom URLs can be easily fetched from <https://archive.org>
+# Web Emulator using Retroarch via EmulatorJS & Archive.org/general CORS proxy
 
-_Will update the README.md when I'm not lazy, clean up unused code (finished this a long time ago and did not intend on attaching a git repository for it, hence the current uncleaned mess)_
+## Written to work with Typescript without using simple embeds, easily hostable on cloudflare via pages for frontend and workers for the backend, Supabase as a hosted database as well, rom URLs can be easily fetched from <https://archive.org>
 
 Further developed and improved rather rushed school project I did a while back called
 [arcade-emulator](https://github.com/numinousv/arcade-emulator)
